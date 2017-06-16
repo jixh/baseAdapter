@@ -11,6 +11,7 @@ import com.zhy.adapter.recyclerview.utils.WrapperUtils;
 
 
 /**
+ * modify by jktaihe on 17/6/16
  * Created by zhy on 16/6/23.
  */
 public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
@@ -20,6 +21,16 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
     private RecyclerView.Adapter mInnerAdapter;
     private View mLoadMoreView;
     private int mLoadMoreLayoutId;
+    private boolean isHasMore = false;
+
+    public boolean isHasMore() {
+        return isHasMore;
+    }
+
+    public void setHasMore(boolean hasMore) {
+        isHasMore = hasMore;
+        notifyDataSetChanged();
+    }
 
     public LoadMoreWrapper(RecyclerView.Adapter adapter)
     {
@@ -28,13 +39,13 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private boolean hasLoadMore()
     {
-        return mLoadMoreView != null || mLoadMoreLayoutId != 0;
+        return isHasMore && (mLoadMoreView != null || mLoadMoreLayoutId != 0);
     }
 
 
     private boolean isShowLoadMore(int position)
     {
-        return hasLoadMore() && (position >= mInnerAdapter.getItemCount());
+        return hasLoadMore() && position >= mInnerAdapter.getItemCount();
     }
 
     @Override
@@ -116,8 +127,7 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
     {
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
 
-        if (lp != null
-                && lp instanceof StaggeredGridLayoutManager.LayoutParams)
+        if (lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams)
         {
             StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
 

@@ -40,12 +40,10 @@ public class RecyclerViewActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recyclerview);
 
-        initDatas();
-
         mRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerview);
 //        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+//        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 //        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 
@@ -78,8 +76,8 @@ public class RecyclerViewActivity extends AppCompatActivity
                         {
                             mDatas.add("Add:" + i);
                         }
-                        mLoadMoreWrapper.notifyDataSetChanged();
-
+                        mLoadMoreWrapper.setHasMore(true);
+//                        Toast.makeText(RecyclerViewActivity.this,"no more data",Toast.LENGTH_SHORT).show();
                     }
                 }, 3000);
             }
@@ -101,6 +99,8 @@ public class RecyclerViewActivity extends AppCompatActivity
                 return false;
             }
         });
+
+        initDatas();
     }
 
     private void initEmptyView()
@@ -123,10 +123,20 @@ public class RecyclerViewActivity extends AppCompatActivity
 
     private void initDatas()
     {
-        for (int i = 'A'; i <= 'z'; i++)
+        new Handler().postDelayed(new Runnable()
         {
-            mDatas.add((char) i + "");
-        }
+            @Override
+            public void run()
+            {
+                for (int i = 'A'; i <= 'z'; i++)
+                {
+                    if (i == 'Z')break;
+                    mDatas.add((char) i + "");
+                }
+                mAdapter.notifyDataSetChanged();
+                mLoadMoreWrapper.setHasMore(true);
+            }
+        },3000);
     }
 
     @Override
