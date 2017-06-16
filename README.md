@@ -1,3 +1,14 @@
+##修改日志
+修改加载更多Adapter添加标识,是否显示底部加载进度
+
+
+
+
+
+
+
+
+
 # base-adapter
 Android 万能的Adapter for ListView,RecyclerView,GridView等，支持多种Item类型的情况。
 
