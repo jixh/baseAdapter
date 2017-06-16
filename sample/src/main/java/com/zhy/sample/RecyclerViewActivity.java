@@ -42,10 +42,11 @@ public class RecyclerViewActivity extends AppCompatActivity
 
         mRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerview);
 //        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 //        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
 
         mAdapter = new CommonAdapter<String>(this, R.layout.item_list, mDatas)
         {
@@ -159,9 +160,13 @@ public class RecyclerViewActivity extends AppCompatActivity
         switch (id)
         {
             case R.id.action_linear:
+                mRecyclerView.removeItemDecoration(new DividerGridItemDecoration(this));
+                mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
                 break;
             case R.id.action_grid:
+                mRecyclerView.removeItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));
+                mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
                 mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
                 break;
             case R.id.action_staggered:
