@@ -14,7 +14,7 @@ import com.zhy.adapter.recyclerview.utils.WrapperUtils;
  * modify by jktaihe on 17/6/16
  * Created by zhy on 16/6/23.
  */
-public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class LoadMoreWrapper extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     public static final int ITEM_TYPE_LOAD_MORE = Integer.MAX_VALUE - 2;
 

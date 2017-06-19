@@ -1,4 +1,4 @@
-package com.zhy.sample;
+package com.zhy.adapter.recyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -75,8 +75,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         {
             final View child = parent.getChildAt(i);
 
-            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
-                    .getLayoutParams();
+            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
             final int top = child.getTop() - params.topMargin;
             final int bottom = child.getBottom() + params.bottomMargin;
             final int left = child.getRight() + params.rightMargin;
@@ -91,11 +90,12 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
                                 int childCount)
     {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+
         if (layoutManager instanceof GridLayoutManager)
         {
             GridLayoutManager glm = (GridLayoutManager)layoutManager;
             int ss = glm.getSpanSizeLookup().getSpanSize(pos);
-            if (ss == spanCount)return true ;
+            if (ss == spanCount) return true ;// 如果是独占一行，则不需要绘制右边
 
             if ((pos + 1) % spanCount == 0)// 如果是最后一列，则不需要绘制右边
             {
@@ -103,8 +103,8 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
             }
         } else if (layoutManager instanceof StaggeredGridLayoutManager)
         {
-            int orientation = ((StaggeredGridLayoutManager) layoutManager)
-                    .getOrientation();
+            StaggeredGridLayoutManager sglm = (StaggeredGridLayoutManager) layoutManager;
+            int orientation = sglm.getOrientation();
             if (orientation == StaggeredGridLayoutManager.VERTICAL)
             {
                 if ((pos + 1) % spanCount == 0)// 如果是最后一列，则不需要绘制右边

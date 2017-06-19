@@ -28,6 +28,16 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         mItemViewDelegateManager = new ItemViewDelegateManager();
     }
 
+    public void addData(int position,T v) {
+        mDatas.add(position, v);
+        notifyItemInserted(position);
+    }
+
+    public void removeData(int position) {
+        mDatas.remove(position);
+        notifyItemRemoved(position);
+    }
+
     @Override
     public int getItemViewType(int position) {
         if (!useItemViewDelegateManager()) return super.getItemViewType(position);

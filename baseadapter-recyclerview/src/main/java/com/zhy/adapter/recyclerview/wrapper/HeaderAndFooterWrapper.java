@@ -13,7 +13,8 @@ import com.zhy.adapter.recyclerview.utils.WrapperUtils;
 /**
  * Created by zhy on 16/6/23.
  */
-public class HeaderAndFooterWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+
+public class HeaderAndFooterWrapper extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     private static final int BASE_ITEM_TYPE_HEADER = 100000;
     private static final int BASE_ITEM_TYPE_FOOTER = 200000;

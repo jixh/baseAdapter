@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhy.adapter.recyclerview.CommonAdapter;
+import com.zhy.adapter.recyclerview.DividerGridItemDecoration;
+import com.zhy.adapter.recyclerview.DividerItemDecoration;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.adapter.recyclerview.wrapper.EmptyWrapper;
 import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
@@ -41,12 +43,14 @@ public class RecyclerViewActivity extends AppCompatActivity
         setContentView(R.layout.activity_recyclerview);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerview);
-//        mRecyclerView.setHasFixedSize(true);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//      mRecyclerView.setHasFixedSize(true);
+
+//      mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//      mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST).setShowLastDividerLine(false));
+
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-//        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
+//      mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
         mAdapter = new CommonAdapter<String>(this, R.layout.item_list, mDatas)
         {
@@ -116,10 +120,10 @@ public class RecyclerViewActivity extends AppCompatActivity
 
         TextView t1 = new TextView(this);
         t1.setText("Header 1");
-        TextView t2 = new TextView(this);
-        t2.setText("Header 2");
+//        TextView t2 = new TextView(this);
+//        t2.setText("Header 2");
         mHeaderAndFooterWrapper.addHeaderView(t1);
-        mHeaderAndFooterWrapper.addHeaderView(t2);
+//        mHeaderAndFooterWrapper.addHeaderView(t2);
     }
 
     private void initDatas()
@@ -170,27 +174,13 @@ public class RecyclerViewActivity extends AppCompatActivity
                 mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
                 break;
             case R.id.action_staggered:
+                mRecyclerView.removeItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));
+                mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
                 mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                 break;
         }
         mRecyclerView.setAdapter(mLoadMoreWrapper);
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onStart()
-    {
-        super.onStart();
-
-
-    }
-
-    @Override
-    public void onStop()
-    {
-        super.onStop();
-
-
     }
 }

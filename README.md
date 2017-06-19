@@ -1,7 +1,8 @@
 # 修改日志
+修改Adapter方式实现底部加载更多
 
 1, 修改LoadMoreWrapper添加标识,是否显示底部加载进度
-
+2, header 或者footer view 建议使用 RecyclerView的不通布局来实现
 
 
 
